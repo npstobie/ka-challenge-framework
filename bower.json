@@ -13,8 +13,7 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests",
-    ".DS_Store"
+    "tests"
   ],
   "dependencies": {
     "jquery": "^2.2.3"

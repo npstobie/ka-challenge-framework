@@ -13,7 +13,14 @@ var checks = {
 		whileLoop: false,
 		functionDeclaration: false
 	},
-	structure: {}
+	structure: {
+		functionDeclaration: {
+			forLoop: true,
+			ifStatement: {
+				varDeclaration: true
+			}
+		}
+	}
 };
 
 //updates the checks object each time a checkbox is selected
@@ -44,6 +51,9 @@ function jsCheck(){
 						console.log(key, type)
 						var classes = "." + key + "1." + type;
 						$(classes).css({'color': '#2ecc71'});
+					} else {
+						var classes = "." + key + "1." + type;
+						$(classes).css({'color': 'red'});
 					}
 				}
 			}
