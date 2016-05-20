@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boiler Plate</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div id="editor"></div>
+    <div id="requirements">
+      <div class="whiteList">
+        <h3>WhiteList</h3>
+        <h5>Your program must have:</h5>
+      </div>
+      <div class="blackList">
+        <h3>BlackList</h3>
+        <h5>Your program must not have:</h5>
+      </div>
+    </div>
+    <div id="testRules">
+      <label>some label</label>
+      <ul>
+        <li>
+          WhiteList
+          This program should have:
+          <ul id="whiteList">
+            <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
+            <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
+            <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
+            <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
+            <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
+          </ul>
+        </li>
+        <li>
+          BlackList
+          This program should not have:
+          <ul id="blackList">
+            <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
+            <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
+            <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
+            <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
+            <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
+          </ul>
+        </li>
+        <li>
+          Structure
+          <ul id="structure">
+            <li><input class="checks" type="checkbox"> checkbox 1</li>
+            <li><input class="checks" type="checkbox"> checkbox 2</li>
+            <li><input class="checks" type="checkbox"> checkbox 3</li>
+            <li><input class="checks" type="checkbox"> checkbox 4</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+    </script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="/scripts/main.js"></script>
+
+  </body>
+</html>

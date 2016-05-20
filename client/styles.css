@@ -1,0 +1,23 @@
+#editor { 
+	height: 800px;
+	width: 70%;
+	display: inline-block;
+}
+
+#testRules {
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	width: 14%;
+}
+
+#requirements {
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	width: 14%;
+}
+
+.task {
+	color: red;
+}
