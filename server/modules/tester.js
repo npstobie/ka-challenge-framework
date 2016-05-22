@@ -24,27 +24,33 @@ module.exports.testText = function(obj){
 			}
 		} 
 		else if (key === "structure") {
-			 results.structure = structureCheck(obj.checks[key]);
+			 results.structure = structureCheck(obj.checks[key], parsedJS);
 		}
 	}
 	return results;
 }
 
-function structureCheck(structure, parsedJS) {
+function structureCheck(struct, parsedJS) {
 	var structure = {};
-	function structureLayerCheck(obj){
+	function structureLayerCheck(obj, js, res){
 		for (var key in obj) {
 			if (typeof obj[key] === "object"){
-					if (tests[key](parsedJS) === true) {
-
-					}
+				var result = tests[key](js);
+				if (result.truth === true) {
+					res[key] = {};
+					res[key] = structureLayerCheck(obj[key], result.body, res[key]);
+				}
 			} else {
-				structure[key] = tests[key](parsedJS);
+				var result = tests[key](js);
+				res[key] = result.truth;
+				return res;
 			}
 		}
+		structure = res;
 	}
-	structureLayerCheck(structure);
 
+	structureLayerCheck(struct, parsedJS, structure);
+	console.log(structure)
 }
 
 var tests = {
@@ -55,7 +61,7 @@ var tests = {
 				return {truth: true, body: body[i]};
 			}
 		}
-		return {truth: false, body: body[i]};
+		return {truth: false, body: null};
 	},
 	ifStatement: function ifCheck(parsedJS){
 		var body = parsedJS.body
@@ -64,7 +70,7 @@ var tests = {
 				return {truth: true, body: body[i]};
 			}
 		}
-		return {truth: false, body: body[i]};
+		return {truth: false, body: null};
 	},
 	whileLoop: function whileLoopCheck(parsedJS) {
 		var body = parsedJS.body
@@ -73,7 +79,7 @@ var tests = {
 				return {truth: true, body: body[i]};
 			}
 		}
-		return {truth: false, body: body[i]};	
+		return {truth: false, body: null};	
 	},
 	varDeclaration: function varCheck(parsedJS) {
 		var body = parsedJS.body
@@ -82,7 +88,7 @@ var tests = {
 				return {truth: true, body: body[i]};
 			}
 		}
-		return {truth: false, body: body[i]};
+		return {truth: false, body: null};
 	},
 	functionDeclaration: function functionCheck(parsedJS) {
 		var body = parsedJS.body
@@ -91,6 +97,6 @@ var tests = {
 				return {truth: true, body: body[i]};
 			}
 		}
-		return {truth: false, body: body[i]};
+		return {truth: false, body: null};
 	}
 }; 

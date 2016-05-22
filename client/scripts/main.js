@@ -45,6 +45,7 @@ function jsCheck(){
 	var text = editor.getValue();
 	$.post("/checkJS", {text: text, checks: checks})
 		.done(function(data){
+			console.log(data);
 			for (var key in data) {
 				for (var type in data[key]) {
 					if (data[key][type] === true) {
