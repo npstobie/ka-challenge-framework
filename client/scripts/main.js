@@ -15,10 +15,8 @@ var checks = {
 	},
 	structure: {
 		functionDeclaration: {
-			forLoop: true,
-			whileLoop: true,
 			ifStatement: {
-				varDeclaration: true
+				whileLoop: true
 			}
 		},
 		forLoop: {
@@ -51,6 +49,9 @@ function jsCheck(){
 		.done(function(data){
 			console.log(data);
 			for (var key in data) {
+				if (key === "structure") {
+					checkStructure(data[key]);
+				}
 				for (var type in data[key]) {
 					if (data[key][type] === true) {
 						console.log(key, type)
@@ -63,4 +64,16 @@ function jsCheck(){
 				}
 			}
 		})
+}
+
+function checkStructure(obj){
+	for (var key in obj) {
+		var elClass = "." + key;
+		if (typeof obj[key] === "object") {
+			$("#structure").find(elClass).css({"color":"green"})
+			checkStructure(obj[key]);
+		} else if (obj[key] === true) {
+			$("#structure").find(elClass).css({"color":"green"})
+		}
+	}
 }
