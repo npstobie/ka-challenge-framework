@@ -16,9 +16,13 @@ var checks = {
 	structure: {
 		functionDeclaration: {
 			forLoop: true,
+			whileLoop: true,
 			ifStatement: {
 				varDeclaration: true
 			}
+		},
+		forLoop: {
+			varDeclaration: true
 		}
 	}
 };

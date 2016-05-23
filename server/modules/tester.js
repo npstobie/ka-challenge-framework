@@ -37,20 +37,18 @@ function structureCheck(struct, parsedJS) {
 			if (typeof obj[key] === "object"){
 				var result = tests[key](js);
 				if (result.truth === true) {
-					res[key] = {};
-					res[key] = structureLayerCheck(obj[key], result.body, res[key]);
+					res[key] = structureLayerCheck(obj[key], result.body.body, {});
 				}
 			} else {
 				var result = tests[key](js);
 				res[key] = result.truth;
-				return res;
 			}
 		}
 		structure = res;
+		return res;
 	}
-
 	structureLayerCheck(struct, parsedJS, structure);
-	console.log(structure)
+	console.log(structure);
 }
 
 var tests = {
