@@ -47,14 +47,12 @@ function jsCheck(){
 	var text = editor.getValue();
 	$.post("/checkJS", {text: text, checks: checks})
 		.done(function(data){
-			console.log(data);
 			for (var key in data) {
 				if (key === "structure") {
 					checkStructure(data[key]);
 				}
 				for (var type in data[key]) {
 					if (data[key][type] === true) {
-						console.log(key, type)
 						var classes = "." + key + "1." + type;
 						$(classes).css({'color': '#2ecc71'});
 					} else {
@@ -69,6 +67,7 @@ function jsCheck(){
 function checkStructure(obj){
 	for (var key in obj) {
 		var elClass = "." + key;
+		console.log(key);
 		if (typeof obj[key] === "object") {
 			$("#structure").find(elClass).css({"color":"green"})
 			checkStructure(obj[key]);

@@ -37,7 +37,9 @@ function structureCheck(struct, parsedJS) {
 			if (typeof obj[key] === "object"){
 				var result = tests[key](js);
 				if (result.truth === true) {
-					res[key] = structureLayerCheck(obj[key], result.body.body, {});
+					var body;
+					result.body.type === "IfStatement" ? body = result.body.consequent.body : body = result.body.body
+					res[key] = structureLayerCheck(obj[key], body, {});
 				}
 			} else {
 				var result = tests[key](js);
@@ -71,7 +73,8 @@ var tests = {
 		return {truth: false, body: null};
 	},
 	whileLoop: function whileLoopCheck(parsedJS) {
-		var body = parsedJS.body
+		var body;
+		Array.isArray(parsedJS) === true ? body = parsedJS : body = parsedJS.body;
 		for (var i=0; i<body.length; i++) {
 			if (body[i].type === "WhileStatement") {
 				return {truth: true, body: body[i]};
