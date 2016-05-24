@@ -38,7 +38,7 @@ function structureCheck(struct, parsedJS) {
 				var result = tests[key](js);
 				if (result.truth === true) {
 					var body;
-					result.body.type === "IfStatement" ? body = result.body.consequent.body : body = result.body.body
+					result.body.type === "IfStatement" ? body = result.body.consequent : body = result.body.body
 					res[key] = structureLayerCheck(obj[key], body, {});
 				}
 			} else {
@@ -50,7 +50,8 @@ function structureCheck(struct, parsedJS) {
 		return res;
 	}
 	structureLayerCheck(struct, parsedJS, structure);
-	console.log(structure);
+	console.log(structure)
+	return structure;
 }
 
 var tests = {
