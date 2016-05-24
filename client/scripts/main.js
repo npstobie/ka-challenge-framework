@@ -25,6 +25,14 @@ var checks = {
 	}
 };
 
+var blackList = {
+		forLoop: false,
+		varDeclaration: true,
+		ifStatement: false,
+		whileLoop: false,
+		functionDeclaration: false
+	}
+
 //updates the checks object each time a checkbox is selected
 $(".checks").change(function(){
 	var current = checks[$(this).parent().parent()[0].id][$(this)[0].value];
@@ -39,8 +47,18 @@ $(".checks").change(function(){
 	jsCheck();
 })
 
-$("#editor").on('keypress', function(){
-	setTimeout(jsCheck, 1);
+$("#editor").on('keydown', function(key){
+	if (key.which === 13) {
+		setTimeout(jsCheck, 1);
+	}
+})
+
+var call;
+$("#editor").on('keypress', function() {
+	clearTimeout(call);
+	call = setTimeout(function(){
+		setTimeout(jsCheck, 1);	
+	}, 2000)
 })
 
 function jsCheck(){
@@ -49,7 +67,6 @@ function jsCheck(){
 		.done(function(data){
 			for (var key in data) {
 				if (key === "structure") {
-					console.log("HEREEREER")
 					checkStructure(data[key]);
 				}
 				for (var type in data[key]) {
@@ -65,12 +82,18 @@ function jsCheck(){
 		})
 }
 
+function check(){
+	var text = editor.getValue();
+	$.post("/checkWhiteList", {text: text, checks: blackList})
+	.done(function(data){
+		console.log(data);
+	})
+}
+
 function checkStructure(obj){
 	for (var key in obj) {
 		var elClass = "." + key;
-		console.log(elClass);
 		if (typeof obj[key] === "object") {
-			console.log("HERE");
 			$("#structure").find(elClass).css({"color":"#2ecc71"})
 			checkStructure(obj[key]);
 		} else if (obj[key] === true) {
