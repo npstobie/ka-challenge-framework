@@ -15,7 +15,7 @@ A Javascript Parser and API built to test Javascript code and ensure that it mee
 2. Clone it locally.
 3. Navigate to the root directory and install dependencies:
 ```sh
-$ cd Foodr-ang
+$ cd ka-challenge-framework-master
 $ npm install
 $ bower install
 ```
