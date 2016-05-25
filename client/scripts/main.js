@@ -1,4 +1,8 @@
+// format that the objects sent to the API should follow if using the 'checkJS'
+// endpoint, the object should include all 3 key/value pairs as seen below
 var checks = {
+	// if using one of the specific endpoints like whiteList, only an object 
+	// reflecting the format of checks.whiteList should be sent with the request
 	whiteList: {
 		forLoop: false,
 		varDeclaration: false,
@@ -25,15 +29,7 @@ var checks = {
 	}
 };
 
-var blackList = {
-		forLoop: false,
-		varDeclaration: true,
-		ifStatement: false,
-		whileLoop: false,
-		functionDeclaration: false
-	}
-
-//updates the checks object each time a checkbox is selected
+// updates the checks object each time a checkbox is selected
 $(".checks").change(function(){
 	var current = checks[$(this).parent().parent()[0].id][$(this)[0].value];
 	checks[$(this).parent().parent()[0].id][$(this)[0].value] = !current;
@@ -47,24 +43,40 @@ $(".checks").change(function(){
 	jsCheck();
 })
 
+// makes a call to the server each time a user presses the enter key or the semicolon key
 $("#editor").on('keydown', function(key){
-	if (key.which === 13) {
+	if (key.which === 13 || key.which === 186) {
 		setTimeout(jsCheck, 1);
 	}
 })
 
-var call;
-$("#editor").on('keypress', function() {
-	clearTimeout(call);
-	call = setTimeout(function(){
-		setTimeout(jsCheck, 1);	
-	}, 2000)
+var timer = createTimeout();
+
+// calls timer anytime 
+$("#editor").on('keydown', function(){
+	timer();
 })
 
+//
+function createTimeout() {
+	var timeout;
+	return (
+		function(){
+			clearTimeout(timeout);
+			timeout = setTimeout(function(){
+				jsCheck();
+			},2500)
+		}
+	)
+}
+
+// function that makes the call from the client to the server, checks whiteList, blackList,
+// and structure, and updates the colors of checks on the client to green if the check passed
 function jsCheck(){
 	var text = editor.getValue();
 	$.post("/checkJS", {text: text, checks: checks})
 		.done(function(data){
+			console.log(data);
 			for (var key in data) {
 				if (key === "structure") {
 					checkStructure(data[key]);
@@ -82,14 +94,8 @@ function jsCheck(){
 		})
 }
 
-function check(){
-	var text = editor.getValue();
-	$.post("/checkWhiteList", {text: text, checks: blackList})
-	.done(function(data){
-		console.log(data);
-	})
-}
-
+// function that updates the checks on the structure code
+// (this code is not verbose, would definitely update if I had more time)
 function checkStructure(obj){
 	for (var key in obj) {
 		var elClass = "." + key;

@@ -2,63 +2,68 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Boiler Plate</title>
+    <title>Challenge Framework</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
+    <div id="title">
+      Javascript Parser
+    </div>
     <div id="editor"></div>
     <div id="requirements">
-      <div class="whiteList">
-        <h3>WhiteList</h3>
-        <h5>Your program must have:</h5>
+      <div class="whiteList tests">
+        <h3 class="title">WhiteList</h3>
+        <h5 class="subtitle">Your program must have:</h5>
       </div>
-      <div class="blackList">
-        <h3>BlackList</h3>
-        <h5>Your program must not have:</h5>
+      <div class="blackList tests">
+        <h3 class="title">BlackList</h3>
+        <h5 class="subtitle">Your program must not have:</h5>
+      </div>
+      <div class="tests">
+        <h3 class="title">Structure</h3>
+        <h5 class="subtitle">Your program should be formatted as:</h5>
+        <ul id="structure">
+          <li class="structure functionDeclaration">Function Declaration</li>
+            <ul>
+              <li class="structure ifStatement">If Statement</li>
+                <ul>
+                  <li class="structure whileLoop">While Loop</li>
+                </ul>
+            </ul>
+          <li class="structure forLoop">For Loop</li>
+            <ul>
+              <li class="structure varDeclaration">Variable Declaration</li>
+            </ul>
+        </ul>
       </div>
     </div>
     <div id="testRules">
-      <label>some label</label>
-      <ul>
-        <li>
-          WhiteList
-          This program should have:
-          <ul id="whiteList">
-            <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
-            <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
-            <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
-            <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
-            <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
-          </ul>
-        </li>
-        <li>
-          BlackList
-          This program should not have:
-          <ul id="blackList">
-            <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
-            <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
-            <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
-            <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
-            <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
-          </ul>
-        </li>
-        <li>
-          Structure
-          <ul id="structure">
-            <li class="structure functionDeclaration">Function Declaration</li>
-              <ul>
-                <li class="structure ifStatement">If Statement</li>
-                  <ul>
-                    <li class="structure whileLoop">While Loop</li>
-                  </ul>
-              </ul>
-            <li class="structure forLoop">For Loop</li>
-              <ul>
-                <li class="structure varDeclaration">Variable Declaration</li>
-              </ul>
-          </ul>
-        </li>
+    <div class="testCases">
+      <div class="titles">
+        <h3 class="title">WhiteList</h3>
+        <h5 class="subtitle">Your program should include:</h5>
+      </div>
+      <ul id="whiteList">
+        <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
+        <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
+        <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
+        <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
+        <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
       </ul>
+    </div>
+    <div class="testCases">
+      <div class="titles">
+        <h3 class="title">BlackList</h3>
+        <h5 class="subtitle">Your program should not include:</h5>
+      </div>
+      <ul id="blackList">
+        <li><input class="checks" type="checkbox" value="forLoop">A For Loop</li>
+        <li><input class="checks" type="checkbox" value="varDeclaration">A Variable Declaration</li>
+        <li><input class="checks" type="checkbox" value="ifStatement">A If Statement</li>
+        <li><input class="checks" type="checkbox" value="whileLoop">A While Loop</li>
+        <li><input class="checks" type="checkbox" value="functionDeclaration">A Function Declaration</li>
+      </ul>
+    </div>
     </div>
 
     <script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
