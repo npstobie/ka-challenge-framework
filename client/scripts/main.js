@@ -52,12 +52,13 @@ $("#editor").on('keydown', function(key){
 
 var timer = createTimeout();
 
-// calls timer anytime 
+// calls timer anytime the user doesn't type for 2.5 seconds
 $("#editor").on('keydown', function(){
 	timer();
 })
 
-//
+// used a function to create the timeout so the timeout variable is private
+// and not assigned in the global scope
 function createTimeout() {
 	var timeout;
 	return (
