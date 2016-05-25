@@ -2,7 +2,7 @@
 
 A Javascript Parser and API built to test Javascript code and ensure that it meets specified requirements.
 
-### Core Technologies used in Foodr
+### Core Technologies used:
 
 - [node.js] - JavaScript runtime built on Chrome's V8 JavaScript engine
 - [Express] - Node.js web application framework
